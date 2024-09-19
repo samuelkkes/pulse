@@ -4,7 +4,6 @@ import {LanguagesIcon} from "lucide-react";
 import {Menu} from "@/components/ui/menu";
 import {NavbarLangSwitchSelect} from "@/components/auth/navbar-lang-switch-select";
 import {useState} from "react";
-import {Placement} from "@react-types/overlays";
 import {type Selection} from "@react-types/shared"
 import {useCurrentLocale} from "@/locales/client";
 import {buttonStyles} from "@/components/ui/button";
