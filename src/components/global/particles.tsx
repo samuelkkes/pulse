@@ -1,6 +1,6 @@
 'use client'
 
-import React, {useRef, useEffect} from 'react'
+import React, {useEffect, useRef} from 'react'
 import MousePosition from '@/utils/mouse-position'
 
 interface ParticlesProps {
@@ -40,33 +40,34 @@ export default function Particles({
         return () => {
             window.removeEventListener('resize', initCanvas)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
+        const onMouseMove = () => {
+            if (canvasRef.current) {
+                const rect = canvasRef.current.getBoundingClientRect()
+                const {w, h} = canvasSize.current
+                const x = mousePosition.x - rect.left - w / 2
+                const y = mousePosition.y - rect.top - h / 2
+                const inside = x < w / 2 && x > -w / 2 && y < h / 2 && y > -h / 2
+                if (inside) {
+                    mouse.current.x = x
+                    mouse.current.y = y
+                }
+            }
+        }
         onMouseMove()
     }, [mousePosition.x, mousePosition.y])
 
     useEffect(() => {
         initCanvas()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [refresh])
 
     const initCanvas = () => {
         resizeCanvas()
         drawParticles()
-    }
-
-    const onMouseMove = () => {
-        if (canvasRef.current) {
-            const rect = canvasRef.current.getBoundingClientRect()
-            const {w, h} = canvasSize.current
-            const x = mousePosition.x - rect.left - w / 2
-            const y = mousePosition.y - rect.top - h / 2
-            const inside = x < w / 2 && x > -w / 2 && y < h / 2 && y > -h / 2
-            if (inside) {
-                mouse.current.x = x
-                mouse.current.y = y
-            }
-        }
     }
 
     type Circle = {
@@ -133,8 +134,7 @@ export default function Particles({
 
     const drawParticles = () => {
         clearContext()
-        const particleCount = quantity
-        for (let i = 0; i < particleCount; i++) {
+        for (let i = 0; i < quantity; i++) {
             const circle = circleParams()
             drawCircle(circle)
         }
