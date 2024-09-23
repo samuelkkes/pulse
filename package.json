@@ -6,7 +6,6 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "postinstall": "prisma generate",
     "lint": "next lint",
     "lint:debug": "eslint --debug",
     "lint:fix": "next lint --fix",
@@ -14,7 +13,8 @@
     "migrate": "prisma migrate dev",
     "pull": "prisma db pull",
     "push": "prisma db push",
-    "studio": "prisma studio"
+    "studio": "prisma studio",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.5.0",
