@@ -45,7 +45,7 @@ const Body = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => 
 
 const popoverContentStyles = tv({
   base: [
-    "max-w-xs min-w-80 p-4 rounded-xl border bg-overlay bg-clip-padding text-overlay-fg shadow-sm dark:backdrop-blur-2xl dark:backdrop-saturate-200 lg:text-sm sm:max-w-3xl forced-colors:bg-[Canvas]"
+    "min-w-80 max-w-xs rounded-xl border bg-overlay bg-clip-padding p-4 text-overlay-fg shadow-sm dark:backdrop-blur-2xl dark:backdrop-saturate-200 sm:max-w-3xl lg:text-sm forced-colors:bg-[Canvas]"
   ],
   variants: {
     isMenu: {
@@ -66,17 +66,17 @@ const popoverContentStyles = tv({
 
 const drawerStyles = tv({
   base: [
-    "fixed max-h-full bottom-0 top-auto z-50 w-full bg-overlay max-w-2xl border border-b-transparent outline-none"
+    "fixed bottom-0 top-auto z-50 max-h-full w-full max-w-2xl border border-b-transparent bg-overlay outline-none"
   ],
   variants: {
     isMenu: {
-      true: "p-0 [&_[role=dialog]]:px-0 rounded-t-xl",
-      false: "py-4 rounded-t-3xl"
+      true: "rounded-t-xl p-0 [&_[role=dialog]]:px-0",
+      false: "rounded-t-3xl py-4"
     },
     isEntering: {
       true: [
-        "[will-change:transform] [transition:transform_0.5s_cubic-bezier(0.32,_0.72,_0,_1)]",
-        "animate-in duration-200 fade-in-0 slide-in-from-bottom-56",
+        "[transition:transform_0.5s_cubic-bezier(0.32,_0.72,_0,_1)] [will-change:transform]",
+        "duration-200 animate-in fade-in-0 slide-in-from-bottom-56",
         "[transition:translate3d(0,_100%,_0)]",
         "sm:slide-in-from-bottom-auto sm:slide-in-from-top-[20%]"
       ]
@@ -130,7 +130,7 @@ const Content = ({
       >
         <Dialog
           aria-label={isMenu ? "Menu" : props["aria-label"]}
-          className="focus:outline-none touch-none"
+          className="touch-none focus:outline-none"
         >
           {children}
         </Dialog>

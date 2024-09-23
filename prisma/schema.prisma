@@ -1,0 +1,235 @@
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+// Enums
+
+enum BillingType {
+  Unite
+  ForfaitRecurent
+}
+
+enum BillingMethod {
+  PreFacturation
+  PostFacturation
+}
+
+enum ImpactType {
+  C
+  P
+  Q
+  R
+}
+
+enum OwnerType {
+  CFAO
+  Client
+}
+
+enum StatusType {
+  EnCours
+  Teminer
+}
+
+enum TypeContract {
+  Stage
+  CDD
+  CDI
+}
+
+// Tables
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  isManager    Boolean
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VerificationToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+model User {
+  id            String       @id @default(cuid())
+  name          String?
+  email         String       @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  accounts      Account[]
+  sessions      Session[]
+  managers      Manager[]
+  technicians   Technician[]
+  works         Work[]
+  projects      Project[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Manager {
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  @@id([userId])
+}
+
+model Technician {
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String
+  matricule    String?
+  profession   String
+  service      Service      @relation(fields: [serviceId], references: [id], onDelete: SetDefault)
+  typeContract TypeContract
+  startDate    DateTime?
+  endDate      DateTime?
+  serviceId    String
+
+  @@id([userId])
+}
+
+model Service {
+  id          String       @id @default(cuid())
+  name        String
+  createdAt   DateTime     @default(now())
+  technicians Technician[]
+}
+
+model Client {
+  id        String     @id @default(cuid())
+  name      String
+  createdAt DateTime   @default(now())
+  agencies  Agency[]
+  contracts Contract[]
+  projects  Project[]
+}
+
+model Agency {
+  id        String   @id @default(cuid())
+  clientId  String
+  client    Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  name      String
+  location  String?
+  createdAt DateTime @default(now())
+}
+
+model Contract {
+  id                String            @id @default(uuid())
+  clientId          String
+  client            Client            @relation(fields: [clientId], references: [id])
+  affair            String
+  billingType       BillingType
+  billingMethod     BillingMethod
+  startDate         DateTime
+  subscribeDate     DateTime
+  designation       String
+  contractHistories ContractHistory[]
+}
+
+model ContractHistory {
+  id         String     @id @default(uuid())
+  contractId String
+  endDate    DateTime
+  statut     StatusType
+  renewal    Boolean
+  createdAt  DateTime   @default(now())
+  contract   Contract   @relation(fields: [contractId], references: [id], onDelete: Cascade)
+}
+
+model Metier {
+  id       String    @id @default(cuid())
+  name     String    @unique
+  projects Project[]
+}
+
+model Project {
+  id            String    @id @default(uuid())
+  title         String
+  description   String?
+  perimeter     Metier    @relation(fields: [metierId], references: [id], onDelete: SetDefault)
+  affair        String
+  deliveryDate  DateTime?
+  startDate     DateTime
+  endDate       DateTime
+  actualEndDate DateTime?
+  clientId      String
+  client        Client    @relation(fields: [clientId], references: [id])
+  metierId      String
+  director      User      @relation(fields: [directorId], references: [id])
+  works         Work[]
+  Steps         Step[]
+  directorId    String
+}
+
+model Step {
+  id          String     @id @default(uuid())
+  title       String
+  description String?
+  weigth      Int
+  project     Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId   String
+  startDate   DateTime
+  endDate     DateTime
+  createdAt   DateTime   @default(now())
+  Planning    Planning[]
+}
+
+model Planning {
+  id            String    @id @default(uuid())
+  title         String
+  description   String?
+  start         DateTime
+  end           DateTime
+  actualEndDate DateTime?
+  weigth        Int
+  advancement   Int
+  finish        Boolean   @default(false)
+  step          Step      @relation(fields: [stepId], references: [id], onDelete: Cascade)
+  stepId        String
+}
+
+model Work {
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId String
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+
+  @@id([projectId, userId])
+}

@@ -26,7 +26,7 @@ const NavbarClock = () => {
 
     return (
         <Button size="extra-small" appearance="plain"
-                className="font-mono gap-x-0.5 text-xs text-muted-fg font-normal hover:text-fg hover:bg-secondary/20">
+                className="gap-x-0.5 font-mono text-xs font-normal text-muted-fg hover:bg-secondary/20 hover:text-fg">
             {formatTime(hour)}
             <span className="animate-caret-blink">:</span>
             {formatTime(minute)}

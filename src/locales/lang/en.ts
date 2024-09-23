@@ -5,8 +5,6 @@ export default {
         password: "Password",
         mainBtn: "Continue with Email",
         googleBtn: "Continue with Google",
-        useCode: "Use Code",
-        usePassword: "Use Password",
     },
     theme: {
         dark: "Dark",

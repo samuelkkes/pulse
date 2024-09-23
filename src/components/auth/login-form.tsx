@@ -9,26 +9,48 @@ import {Form} from "@/components/ui/form";
 import {Button} from "@/components/ui/button";
 import {Separator} from "@/components/ui/separator";
 import {Card} from "@/components/ui/card";
-import {InputOTP} from "@/components/ui/input-otp";
 import {useScopedI18n} from "@/locales/client";
 import {IconBrandGoogle} from "justd-icons";
 import {TextField} from "@/components/ui/text-field";
+import {useSearchParams} from "next/navigation";
+import login from "@/actions/login";
+import {Note} from "@/components/ui/note"
 
 const LoginForm = () => {
     const t = useScopedI18n('login')
-
+    const searchParams = useSearchParams();
+    const callbackUrl = searchParams.get("callbackUrl");
+    const urlError = searchParams.get("error") === "OAuthAccountNotLinked"
+        ? "Email already in use with different provider!"
+        : "";
     const [isPending, startTransition] = useTransition();
-    const [showTwoFactor, ] = useState(false);
+    const [success, setSuccess] = useState<string | undefined>("");
+    const [error, setError] = useState<string | undefined>("");
+
     const form = useForm<z.infer<typeof loginSchema>>({
         resolver: zodResolver(loginSchema),
         defaultValues: {
             email: "",
+            password: ""
         }
     });
 
-    const onSubmit = () => {
+    const onSubmit = async (values: z.infer<typeof loginSchema>) => {
+        setError("");
+        setSuccess("");
+
         startTransition(() => {
-        })
+            login(values, callbackUrl).then((data) => {
+                if (data?.error) {
+                    form.reset();
+                    setError(data.error);
+                }
+                if (data?.success) {
+                    form.reset();
+                    setSuccess(data.success);
+                }
+            }).catch(() => setError("Something went wrong!"));
+        });
     }
 
     return (
@@ -44,41 +66,31 @@ const LoginForm = () => {
                         control={form.control}
                         name="email"
                         render={({field}) => (
-                            <TextField label="Email" type="email"  className="w-full" placeholder="you@email.com" {...field} />
+                            <TextField label="Email" type="email" className="w-full" validationBehavior="aria"
+                                       placeholder="you@email.com" {...field} />
                         )}
                     />
-                    {showTwoFactor && (
-                        <Controller
-                            disabled={isPending}
-                            control={form.control}
-                            name="code"
-                            render={({field}) => (
-                                <InputOTP maxLength={6} {...field}>
-                                    <InputOTP.Group className="flex-1">
-                                        <InputOTP.Slot className="flex-1" index={0}/>
-                                        <InputOTP.Slot className="flex-1" index={1}/>
-                                        <InputOTP.Slot className="flex-1" index={2}/>
-                                    </InputOTP.Group>
-                                    <InputOTP.Separator/>
-                                    <InputOTP.Group className="flex-1">
-                                        <InputOTP.Slot className="flex-1" index={3}/>
-                                        <InputOTP.Slot className="flex-1" index={4}/>
-                                        <InputOTP.Slot className="flex-1" index={5}/>
-                                    </InputOTP.Group>
-                                </InputOTP>
-                            )}
-                        />
-                    )}
-                    <Button className="w-full" size="small">{t("mainBtn")}</Button>
+                    <Controller
+                        disabled={isPending}
+                        control={form.control}
+                        name="password"
+                        render={({field}) => (
+                            <TextField label={t("password")} type="password" className="w-full"
+                                       validationBehavior="aria"
+                                       placeholder="you@email.com" {...field} />
+                        )}
+                    />
+                    <Button className="w-full">{t("mainBtn")}</Button>
                 </Form>
+                {success && (<Note intent="primary">{success}</Note>)}
+                {(error || urlError) && (<Note intent="danger">{error || urlError}</Note>)}
             </Card.Content>
-            <Separator />
+            <Separator/>
             <Card.Content className="flex flex-row items-center gap-x-4 p-4">
                 <Button
                     className="flex-1"
-                    size="small"
                     appearance="outline">
-                    <IconBrandGoogle className="mr-2 size-4"/>
+                    <IconBrandGoogle className="mr-2 !size-5"/>
                     {t("googleBtn")}
                 </Button>
             </Card.Content>

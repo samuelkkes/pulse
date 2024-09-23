@@ -21,19 +21,19 @@ import { TouchTarget } from "./touch-target"
 const dialogStyles = tv({
   slots: {
     root: [
-      "dlc relative flex max-h-[inherit] [&::-webkit-scrollbar]:size-0.5 [scrollbar-width:thin] flex-col overflow-hidden outline-none",
-      "sm:[&:not(:has([data-slot=dialog-body]))]:px-6 sm:[&:has([data-slot=dialog-body])_[data-slot=dialog-header]]:px-6 sm:[&:has([data-slot=dialog-body])_[data-slot=dialog-footer]]:px-6",
-      "[&:not(:has([data-slot=dialog-body]))]:px-4 [&:has([data-slot=dialog-body])_[data-slot=dialog-header]]:px-4 [&:has([data-slot=dialog-body])_[data-slot=dialog-footer]]:px-4"
+      "dlc relative flex max-h-[inherit] flex-col overflow-hidden outline-none [scrollbar-width:thin] [&::-webkit-scrollbar]:size-0.5",
+      "sm:[&:has([data-slot=dialog-body])_[data-slot=dialog-footer]]:px-6 sm:[&:has([data-slot=dialog-body])_[data-slot=dialog-header]]:px-6 sm:[&:not(:has([data-slot=dialog-body]))]:px-6",
+      "[&:has([data-slot=dialog-body])_[data-slot=dialog-footer]]:px-4 [&:has([data-slot=dialog-body])_[data-slot=dialog-header]]:px-4 [&:not(:has([data-slot=dialog-body]))]:px-4"
     ],
     header: "relative flex flex-col pb-3 pt-4 sm:pt-6",
     title: "flex flex-1 items-center",
-    description: "text-sm block text-muted-fg mt-0.5 sm:mt-1",
+    description: "mt-0.5 block text-sm text-muted-fg sm:mt-1",
     body: [
-      "flex flex-1 flex-col gap-2 overflow-auto px-4 sm:px-6 py-1",
+      "flex flex-1 flex-col gap-2 overflow-auto px-4 py-1 sm:px-6",
       "max-h-[calc(var(--visual-viewport-height)-var(--visual-viewport-vertical-padding)-var(--dialog-header-height,0px)-var(--dialog-footer-height,0px))]"
     ],
-    footer: "mt-auto flex flex-col-reverse justify-between gap-3 pb-4 sm:pb-6 pt-4 sm:flex-row",
-    closeIndicator: "close absolute right-2 top-2 size-6 z-50"
+    footer: "mt-auto flex flex-col-reverse justify-between gap-3 py-4 sm:flex-row sm:pb-6",
+    closeIndicator: "close absolute right-2 top-2 z-50 size-6"
   }
 })
 

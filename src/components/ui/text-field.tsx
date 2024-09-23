@@ -40,13 +40,13 @@ const TextField = ({
         className={fieldGroupPrefixStyles({ className })}
       >
         {isLoading && indicatorPlace === "prefix" ? (
-          <IconLoader className="animate-spin isPfx" />
+          <IconLoader className="isPfx animate-spin" />
         ) : prefix ? (
           <span className="atrs isPfx x2e2">{prefix}</span>
         ) : null}
         <Input className="px-2.5" placeholder={placeholder} />
         {isLoading && indicatorPlace === "suffix" ? (
-          <IconLoader className="animate-spin isSfx" />
+          <IconLoader className="isSfx animate-spin" />
         ) : suffix ? (
           <span className="atrs isSfx x2e2">{suffix}</span>
         ) : null}

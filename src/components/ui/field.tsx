@@ -43,17 +43,17 @@ const fieldBorderStyles = tv({
 
 const fieldGroupPrefixStyles = tv({
   base: [
-    "flex group-invalid:border-danger group-disabled:bg-secondary group-disabled:opacity-50 items-center group-invalid:focus-within:ring-danger/20",
-    "[&>.x2e2>.kbt32x]:size-7 [&>.x2e2>.kbt32x]:rounded-sm [&>.x2e2:has(.kbt32x)]:size-9 [&>.x2e2:has(.kbt32x)]:grid [&>.x2e2:has(.kbt32x)]:place-items-center",
+    "flex items-center group-invalid:border-danger group-invalid:focus-within:ring-danger/20 group-disabled:bg-secondary group-disabled:opacity-50",
+    "[&>.x2e2:has(.kbt32x)]:grid [&>.x2e2:has(.kbt32x)]:size-9 [&>.x2e2:has(.kbt32x)]:place-items-center [&>.x2e2>.kbt32x]:size-7 [&>.x2e2>.kbt32x]:rounded-sm",
     "[&>.x2e2>.kbt32x]:before:rounded-[calc(theme(borderRadius.sm)-1px)] [&>.x2e2>.kbt32x]:after:rounded-[calc(theme(borderRadius.sm)-1px)] dark:[&>.x2e2>.kbt32x]:after:rounded-sm",
-    "[&>.isSfx:has(.kbt32x)]:-mr-2 [&>.isPfx:has(.kbt32x)]:-ml-2 [&>.isSfx>.kbt32x]:mr-0.5 [&>.isPfx>.kbt32x]:ml-0.5"
+    "[&>.isPfx:has(.kbt32x)]:-ml-2 [&>.isPfx>.kbt32x]:ml-0.5 [&>.isSfx:has(.kbt32x)]:-mr-2 [&>.isSfx>.kbt32x]:mr-0.5"
   ]
 })
 
 const fieldStyles = tv({
   slots: {
     description: "text-pretty text-base/6 text-muted-fg sm:text-sm/6",
-    label: "w-fit cursor-default font-medium text-secondary-fg text-sm",
+    label: "w-fit cursor-default text-sm font-medium text-secondary-fg",
     fieldError: "text-sm text-danger forced-colors:text-[Mark]",
     input: [
       "w-full min-w-0 bg-transparent p-2 text-base text-fg placeholder-muted-fg outline-none focus:outline-none lg:text-sm"
@@ -88,11 +88,11 @@ const FieldError = ({ className, ...props }: FieldErrorProps) => {
 
 const fieldGroupStyles = tv({
   base: [
-    "group flex h-10 items-center overflow-hidden rounded-lg border border-input bg-bg transition disabled:opacity-50 disabled:bg-secondary forced-colors:bg-[Field]",
+    "group flex h-10 items-center overflow-hidden rounded-lg border border-input bg-bg transition disabled:bg-secondary disabled:opacity-50 forced-colors:bg-[Field]",
     "focus-within:border-ring/85 focus-within:ring-4 focus-within:ring-ring/20",
     "focus-within:invalid:border-danger focus-within:invalid:ring-4 focus-within:invalid:ring-danger/20",
     "invalid:border-danger",
-    "has-[.isPfx]:pl-2.5 has-[.isSfx]:pr-2.5 [&_[data-slot=icon]]:size-4 has-[.atrs]:shrink-0 has-[.atrs]:text-muted-fg"
+    "has-[.atrs]:shrink-0 has-[.isPfx]:pl-2.5 has-[.isSfx]:pr-2.5 has-[.atrs]:text-muted-fg [&_[data-slot=icon]]:size-4"
   ]
 })
 

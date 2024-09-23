@@ -119,8 +119,7 @@ const Navigation = () => {
                 <div
                     /*onMouseDown={handleMouseDown}*/
                     onClick={resetWidth}
-                    className="absolute right-0 top-0 h-full w-0.5 cursor-pointer
-                    bg-primary/30 opacity-50 transition group-hover/sidebar:opacity-100"
+                    className="absolute right-0 top-0 h-full w-0.5 bg-muted-fg/30 opacity-50 transition group-hover/sidebar:opacity-100"
                 />
             </aside>
             <div
@@ -133,7 +132,7 @@ const Navigation = () => {
             >
                 <nav className="w-full bg-transparent px-3 py-2">
                     {isCollapsed &&
-                        <MenuIcon onClick={resetWidth} role="button" className="size-6 text-muted-foreground"/>}
+                        <MenuIcon onClick={resetWidth} role="button" className="size-6"/>}
                 </nav>
             </div>
         </>
