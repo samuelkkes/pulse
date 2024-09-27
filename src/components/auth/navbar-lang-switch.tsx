@@ -26,7 +26,7 @@ const NavbarLangSwitch = () => {
         <Menu>
             <Menu.Trigger className={`${buttonStyles({
                 appearance: "plain",
-                size: "extra-small"
+                size: "square-petite"
             })} text-muted-fg hover:bg-secondary/20 hover:text-fg`}>
                 <LanguagesIcon className="size-4 "/>
             </Menu.Trigger>

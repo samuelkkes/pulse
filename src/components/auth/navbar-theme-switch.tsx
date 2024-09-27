@@ -21,7 +21,7 @@ const NavbarThemeSwitch = () => {
 
     return (
         <Popover>
-            <Button ref={triggerRef} onPress={() => setOpen(true)} size="extra-small" appearance="plain"
+            <Button ref={triggerRef} onPress={() => setOpen(true)} size="square-petite" appearance="plain"
                     className="hidden hover:bg-secondary/20 md:flex">
                 <IconCircleHalf className="size-4 "/>
             </Button>

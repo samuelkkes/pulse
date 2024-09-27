@@ -59,7 +59,7 @@ const LoginForm = () => {
                 <Card.Title className="text-2xl">{t("title")}</Card.Title>
                 <Card.Description className="text-pretty">{t("description")}</Card.Description>
             </Card.Header>
-            <Card.Content className="pb-4">
+            <Card.Content className="pb-5">
                 <Form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                     <Controller
                         disabled={isPending}
@@ -77,7 +77,7 @@ const LoginForm = () => {
                         render={({field}) => (
                             <TextField label={t("password")} type="password" className="w-full"
                                        validationBehavior="aria"
-                                       placeholder="you@email.com" {...field} />
+                                       placeholder="******" {...field} />
                         )}
                     />
                     <Button className="w-full">{t("mainBtn")}</Button>
@@ -86,7 +86,7 @@ const LoginForm = () => {
                 {(error || urlError) && (<Note intent="danger">{error || urlError}</Note>)}
             </Card.Content>
             <Separator/>
-            <Card.Content className="flex flex-row items-center gap-x-4 p-4">
+            <Card.Content className="flex flex-row items-center p-5 px-6">
                 <Button
                     className="flex-1"
                     appearance="outline">

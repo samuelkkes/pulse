@@ -13,7 +13,7 @@ export default function SubLayout({params: {locale}, children}: {
         <I18nProviderClient locale={locale}>
             <main className="relative flex h-svh flex-col">
                 <Particles quantity={500} className="absolute inset-0 -z-10"/>
-                <nav className="flex items-center justify-between border-b-muted-fg bg-bg px-4 py-2 text-muted-fg">
+                <nav className="fixed left-0 top-0 flex w-full items-center justify-between border-b-muted-fg bg-bg px-4 py-2 text-muted-fg">
                     <span className="cursor-pointer select-none font-mono text-base font-bold
                         transition-colors duration-300 ease-in-out hover:text-fg">
                         Nexus
