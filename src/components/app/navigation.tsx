@@ -6,6 +6,10 @@ import {useMediaQuery} from "usehooks-ts";
 import {usePathname} from "next/navigation";
 import {cn} from "@/lib/utils";
 import {ChevronsLeft, MenuIcon} from "lucide-react";
+import {Separator} from "@/components/ui/separator";
+import { Popover } from "@/components/ui/popover";
+import {Button} from "@/components/ui/button";
+import {IconChevronRight, IconTrophyFill} from "justd-icons";
 
 const Navigation = () => {
     const pathname = usePathname();
@@ -98,7 +102,7 @@ const Navigation = () => {
 
                 ref={sidebarRef}
                 className={cn(
-                    "overflow-x-hidden group/sidebar h-full bg-secondary overflow-y-auto relative flex w-60 flex-col z-[99999]",
+                    "overflow-x-hidden group/sidebar h-full overflow-y-auto relative flex w-60 flex-col z-[99999]",
                     isResetting && "transition-all ease-in-out duration-300",
                     isMobile && "w-0"
                 )}
@@ -114,7 +118,27 @@ const Navigation = () => {
                 >
                     <ChevronsLeft className="size-6"/>
                 </div>
-                <div>
+                <div className="flex h-full flex-col">
+                    <div className="flex-1"></div>
+                    <Separator/>
+                    <div className="p-1">
+                        <Popover>
+                            <Button className="group flex w-full bg-secondary text-secondary-fg" size="extra-small" appearance="plain">
+                                <IconTrophyFill className="mr-2 group-hover:text-primary"/>
+                                <span className="flex-1">Samuel Kougbam</span>
+                                <IconChevronRight className="ml-2"/>
+                            </Button>
+                            <Popover.Content className="min-w-72" showArrow={false} placement="right">
+                                <Popover.Header>
+                                    <Popover.Title>Email</Popover.Title>
+                                    <Popover.Description>We&apos;ll send you an email to log in.</Popover.Description>
+                                </Popover.Header>
+                                <Popover.Footer>
+                                    <Button>Send Login Link</Button>
+                                </Popover.Footer>
+                            </Popover.Content>
+                        </Popover>
+                    </div>
                 </div>
                 <div
                     /*onMouseDown={handleMouseDown}*/

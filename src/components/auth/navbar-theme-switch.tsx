@@ -31,7 +31,7 @@ const NavbarThemeSwitch = () => {
                 onOpenChange={setOpen}
                 triggerRef={triggerRef}
                 className="flex w-fit gap-x-2 border-muted-fg/20 bg-bg/50 p-4 text-muted-fg">
-                <div onClick={() => changeTheme("light")}
+                <div role="button" onClick={() => changeTheme("light")}
                      className="group flex cursor-pointer flex-col items-center space-y-2">
                     <div
                         className={cn("relative pt-4 pl-4 bg-white w-20 h-14 rounded-md overflow-hidden border", theme === "light" && "ring-2 ring-offset-2 ring-offset-bg ring-primary")}>
@@ -47,7 +47,7 @@ const NavbarThemeSwitch = () => {
                     <span
                         className="text-xs transition-colors duration-300 ease-in-out group-hover:text-fg">{t("light")}</span>
                 </div>
-                <div onClick={() => changeTheme("dark")}
+                <div role="button" onClick={() => changeTheme("dark")}
                      className="group flex cursor-pointer flex-col items-center space-y-2">
                     <div
                         className={cn("relative pt-4 pl-4 bg-stone-600 w-20 h-14 rounded-md overflow-hidden border", theme === "dark" && "ring-2 ring-offset-2 ring-offset-bg ring-primary")}>
@@ -63,7 +63,7 @@ const NavbarThemeSwitch = () => {
                     <span
                         className="text-xs transition-colors duration-300 ease-in-out group-hover:text-fg">{t("dark")}</span>
                 </div>
-                <div onClick={() => changeTheme("system")}
+                <div role="button" onClick={() => changeTheme("system")}
                      className="group flex cursor-pointer flex-col items-center space-y-2">
                     <div
                         className={cn("relative w-20 h-14 rounded-md overflow-hidden border flex flex-row", theme === "system" && "ring-2 ring-offset-2 ring-offset-bg ring-primary")}>
