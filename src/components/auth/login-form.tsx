@@ -15,6 +15,7 @@ import {TextField} from "@/components/ui/text-field";
 import {useSearchParams} from "next/navigation";
 import login from "@/actions/login";
 import {Note} from "@/components/ui/note"
+import {signIn} from "next-auth/react";
 
 const LoginForm = () => {
     const t = useScopedI18n('login')
@@ -49,7 +50,7 @@ const LoginForm = () => {
                     form.reset();
                     setSuccess(data.success);
                 }
-            }).catch(() => setError("Something went wrong!"));
+            }).catch(() => setError(t("form.message.error")));
         });
     }
 
@@ -62,25 +63,40 @@ const LoginForm = () => {
             <Card.Content className="pb-5">
                 <Form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                     <Controller
-                        disabled={isPending}
                         control={form.control}
                         name="email"
-                        render={({field}) => (
-                            <TextField label="Email" type="email" className="w-full" validationBehavior="aria"
-                                       placeholder="you@email.com" {...field} />
+                        disabled={isPending}
+                        render={({field, fieldState}) => (
+                            <TextField
+                                label="Email"
+                                type="email"
+                                className="w-full"
+                                validationBehavior="aria"
+                                isRequired
+                                errorMessage={fieldState.error?.message}
+                                isInvalid={fieldState.invalid}
+                                {...field}
+                            />
                         )}
                     />
                     <Controller
                         disabled={isPending}
                         control={form.control}
                         name="password"
-                        render={({field}) => (
-                            <TextField label={t("password")} type="password" className="w-full"
-                                       validationBehavior="aria"
-                                       placeholder="******" {...field} />
+                        render={({field, fieldState}) => (
+                            <TextField
+                                label={t("password")}
+                                type="password"
+                                className="w-full"
+                                validationBehavior="aria"
+                                isRequired
+                                errorMessage={fieldState.error?.message}
+                                isInvalid={fieldState.invalid}
+                                {...field}
+                            />
                         )}
                     />
-                    <Button className="w-full">{t("mainBtn")}</Button>
+                    <Button type="submit" className="w-full">{t("mainBtn")}</Button>
                 </Form>
                 {success && (<Note intent="primary">{success}</Note>)}
                 {(error || urlError) && (<Note intent="danger">{error || urlError}</Note>)}
@@ -88,6 +104,7 @@ const LoginForm = () => {
             <Separator/>
             <Card.Content className="flex flex-row items-center p-5 px-6">
                 <Button
+                    onPress={()=> signIn('google')}
                     className="flex-1"
                     appearance="outline">
                     <IconBrandGoogle className="mr-2 !size-5"/>

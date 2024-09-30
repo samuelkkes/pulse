@@ -6,7 +6,7 @@ import {apiAuthPrefix, authRoutes, DEFAULT_LOGIN_REDIRECT, publicRoutes} from ".
 
 const I18nMiddleware = createI18nMiddleware({
     locales,
-    defaultLocale: 'en',
+    defaultLocale: 'fr',
     urlMappingStrategy: 'rewrite'
 })
 
@@ -17,6 +17,8 @@ export function middleware(request: NextRequest) {
 export default auth((req) => {
     const {nextUrl} = req;
     const isLoggedIn = !!req.auth;
+
+    console.log(isLoggedIn);
 
     const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
     const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
@@ -42,7 +44,7 @@ export default auth((req) => {
         const encodedCallbackUrl = encodeURIComponent(callbackUrl);
 
         return Response.redirect(new URL(
-            `/auth/signin?callbackUrl=${encodedCallbackUrl}`,
+            `/signin?callbackUrl=${encodedCallbackUrl}`,
             nextUrl
         ));
     }

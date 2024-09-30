@@ -7,12 +7,14 @@ import {signIn} from "@/auth";
 import {DEFAULT_LOGIN_REDIRECT} from "@/../route";
 import {AuthError} from "next-auth";
 import {generateVerificationToken} from "@/lib/token";
+import {getScopedI18n} from "@/locales/server";
 
 const Login = async (values: z.infer<typeof loginSchema>, callbackUrl?: string | null) => {
     const validateFields = loginSchema.safeParse(values);
+    const t = await getScopedI18n('login.form.message')
 
     if (!validateFields.success) {
-        return {error: "Invalid fields!"};
+        return {error: t("invalid")};
     }
 
     const {email, password} = validateFields.data;
@@ -20,7 +22,7 @@ const Login = async (values: z.infer<typeof loginSchema>, callbackUrl?: string |
     const existingUser = await getUserByEmail(email);
 
     if (!existingUser || !existingUser.email || !existingUser.password) {
-        return {error: "User does not exist!"};
+        return {error: t("ntExtUser")};
     }
 
     if (!existingUser.emailVerified) {
@@ -34,7 +36,7 @@ const Login = async (values: z.infer<typeof loginSchema>, callbackUrl?: string |
             verificationToken.token,
         );*/
 
-        return {success: "Confirmation email sent!"};
+        return {success: t("cfEmail")};
     }
 
     try {
@@ -47,9 +49,9 @@ const Login = async (values: z.infer<typeof loginSchema>, callbackUrl?: string |
         if (error instanceof AuthError) {
             switch (error.type) {
                 case "CredentialsSignin":
-                    return {error: "Invalid credentials!"};
+                    return {error: t("invalidCr")};
                 default:
-                    return {error: "Something went wrong, please try again!"};
+                    return {error: t("error")};
             }
         }
         throw error;
