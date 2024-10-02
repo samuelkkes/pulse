@@ -1,15 +1,12 @@
-import {createI18nMiddleware} from 'next-international/middleware'
-import {NextRequest} from 'next/server'
-import {locales} from "@/locales";
-import {auth} from "@/auth";
-import {apiAuthPrefix, authRoutes, DEFAULT_LOGIN_REDIRECT, publicRoutes} from "../route";
+import {withIntl} from "@/middlewares/withIntl";
+import {withAuth} from "@/middlewares/withAuth";
+import {chain} from "@/middlewares/chain";
 
+/*
 const I18nMiddleware = createI18nMiddleware({
     locales,
     defaultLocale: 'fr',
-    urlMappingStrategy: 'rewrite'
 })
-
 export function middleware(request: NextRequest) {
     return I18nMiddleware(request)
 }
@@ -17,8 +14,6 @@ export function middleware(request: NextRequest) {
 export default auth((req) => {
     const {nextUrl} = req;
     const isLoggedIn = !!req.auth;
-
-    console.log(isLoggedIn);
 
     const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
     const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
@@ -51,6 +46,9 @@ export default auth((req) => {
 
     return;
 })
+*/
+
+export default chain([withIntl, withAuth]);
 
 export const config = {
     matcher: ['/((?!api|static|.*\\..*|_next|favicon.ico|robots.txt).*)']
