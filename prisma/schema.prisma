@@ -44,6 +44,12 @@ enum TypeContract {
   CDI
 }
 
+enum UserRole {
+  ADMIN
+  MANAGER
+  TECHNICIAN
+}
+
 // Tables
 model Account {
   userId            String
@@ -71,7 +77,6 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  isManager    Boolean
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -93,6 +98,7 @@ model User {
   emailVerified DateTime?
   image         String?
   password      String?
+  role          UserRole     @default(TECHNICIAN)
   accounts      Account[]
   sessions      Session[]
   managers      Manager[]

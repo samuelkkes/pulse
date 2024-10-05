@@ -3,9 +3,10 @@ import {PrismaAdapter} from "@auth/prisma-adapter";
 import Credentials from "@auth/core/providers/credentials";
 import {db} from "@/lib/db";
 import {loginSchema} from "@/schema";
-import {getUserByEmail, getUserById, isUserAManager} from "@/data/user";
+import {getUserByEmail, getUserById} from "@/data/user";
 import Google from "@auth/core/providers/google";
 import bcrypt from "bcryptjs";
+import {v4 as uuidv4} from "uuid";
 
 export const {
     handlers,
@@ -23,25 +24,40 @@ export const {
             const existingUser = await getUserById(user.id!);
 
             //Prevent SignIn without email verification.
-            if (!existingUser?.emailVerified) return false;
+            if (!existingUser?.emailVerified) {
+                return false
+            }
+
+            console.log("")
 
             return true;
         },
-        async session({session, user}) {
+        async session({session}) {
+            if (!session.user) return session
 
-            if (session.user) {
-                session.user.id = user.id
-                session.user.name = user.name;
-                session.user.email = user.email!;
+            session.user = {
+                id: session.user.id,
+                name: session.user.name,
+                email: session.user.email,
+                emailVerified: session.user.emailVerified,
+                image: session.user.image,
+                role: session.user.role
             }
-
-            const isManager = await isUserAManager(user.id);
-
-            if(isManager) {
-                session.user.isManager = isManager;
-            }
-
             return session;
+        },
+        async jwt({ account, user, token }) {
+            if (account?.provider === 'credentials') {
+                const sessionToken = uuidv4()
+                const expires = new Date(Date.now() + 60 * 60 * 24 * 30 * 1000)
+
+                const session = await PrismaAdapter(db).createSession!({
+                    userId: user.id!,
+                    sessionToken,
+                    expires,
+                })
+                token.sessionId = session.sessionToken
+            }
+            return token
         },
     },
     events: {
@@ -50,17 +66,32 @@ export const {
                 where: {id: user.id},
                 data: {emailVerified: new Date()}
             });
+        },
+        async signOut(message) {
+            if ('session' in message && message.session?.sessionToken) {
+                await db.session.deleteMany({
+                    where: {
+                        sessionToken: message.session.sessionToken,
+                    },
+                })
+            }
         }
     },
+    jwt: {
+        async encode({ token }) {
+            return token?.sessionId as unknown as string
+        },
+    },
     pages: {
+        error: "/error",
         signIn: "/signin",
-        error: "/error"
+        signOut: '/'
     },
     providers: [
         Google,
         Credentials({
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            async authorize(credentials, req) {
+            async authorize(credentials) {
                 const validateFields = loginSchema.safeParse(credentials);
 
                 if (validateFields.success) {
@@ -74,7 +105,7 @@ export const {
                         user.password
                     );
 
-                    if (!passwordMatch) return user;
+                    if (passwordMatch) return user;
                 }
 
                 return null;
@@ -83,5 +114,6 @@ export const {
     ],
     session: {
         strategy: "database",
-    }
+    },
+    trustHost: true
 })

@@ -1,10 +1,13 @@
-import React from 'react'
-import {getLocale} from "next-intl/server";
+import {auth} from "@/auth";
 
 const Page = async () => {
-    const locale = await getLocale()
+    const session = await auth()
     return (
-        <div>{locale}</div>
+        <div className="flex min-h-screen flex-col items-center justify-center p-4">
+            <div>
+                {JSON.stringify(session)}
+            </div>
+        </div>
     )
 }
 export default Page

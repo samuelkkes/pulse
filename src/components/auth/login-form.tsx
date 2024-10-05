@@ -17,6 +17,7 @@ import {Note} from "@/components/ui/note"
 import {signIn} from "next-auth/react";
 import {useTranslations} from "next-intl";
 import AuthCardWrapper from "@/components/auth/authCardWrapper";
+import { Loader } from "@/components/ui/loader"
 
 const LoginForm = () => {
     const t = useTranslations('login')
@@ -93,7 +94,10 @@ const LoginForm = () => {
                             />
                         )}
                     />
-                    <Button type="submit" className="w-full">{t("mainBtn")}</Button>
+                    <Button isDisabled={isPending} type="submit" className="w-full">
+                        {isPending && <Loader className="mr-4" variant="spin" />}
+                        <span>{isPending ? t("mainBtn.loading") : t("mainBtn.default")}</span>
+                    </Button>
                 </Form>
                 {success && (<Note intent="primary">{success}</Note>)}
                 {(error || urlError) && (<Note intent="danger">{error || urlError}</Note>)}
@@ -101,9 +105,10 @@ const LoginForm = () => {
             <Separator/>
             <Card.Content className="flex flex-row items-center p-5 px-6">
                 <Button
+                    isDisabled={isPending}
                     onPress={() => signIn('google')}
                     className="flex-1 transition-colors duration-150"
-                    appearance="outline">
+                    intent="secondary">
                     <IconBrandGoogle className="mr-2 !size-5 transition-colors duration-150"/>
                     {t("googleBtn")}
                 </Button>

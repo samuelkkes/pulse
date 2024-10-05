@@ -1,6 +1,5 @@
 "use client";
 
-
 import React, {ElementRef, useEffect, useRef, useState} from "react";
 import {useMediaQuery} from "usehooks-ts";
 import {usePathname} from "next/navigation";
@@ -10,6 +9,7 @@ import {Separator} from "@/components/ui/separator";
 import { Popover } from "@/components/ui/popover";
 import {Button} from "@/components/ui/button";
 import {IconChevronRight, IconTrophyFill} from "justd-icons";
+import {signOut} from "next-auth/react";
 
 const Navigation = () => {
     const pathname = usePathname();
@@ -134,7 +134,14 @@ const Navigation = () => {
                                     <Popover.Description>We&apos;ll send you an email to log in.</Popover.Description>
                                 </Popover.Header>
                                 <Popover.Footer>
-                                    <Button>Send Login Link</Button>
+                                    <Button
+                                        onPress={()=> signOut({
+                                            redirect: true,
+                                            redirectTo: "/"
+                                        })}
+                                    >
+                                        logout
+                                    </Button>
                                 </Popover.Footer>
                             </Popover.Content>
                         </Popover>

@@ -3,7 +3,10 @@
     "title": "Welcome to Nexus",
     "description": "Please sign in below.",
     "password": "Password",
-    "mainBtn": "Continue with Email",
+    "mainBtn": {
+      "default": "Continue with Email",
+      "loading": "Processing..."
+    },
     "googleBtn": "Continue with Google",
     "form": {
       "email": {

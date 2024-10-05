@@ -6,10 +6,10 @@ import {getUserByEmail} from "@/data/user";
 import {signIn} from "@/auth";
 import {DEFAULT_LOGIN_REDIRECT} from "@/../route";
 import {AuthError} from "next-auth";
-import {generateVerificationToken} from "@/lib/token";
+//import {generateVerificationToken} from "@/lib/token";
 import {getTranslations} from "next-intl/server";
 
-const Login = async (values: z.infer<typeof loginSchema>, callbackUrl?: string | null) => {
+const login = async (values: z.infer<typeof loginSchema>, callbackUrl?: string | null) => {
     const validateFields = loginSchema.safeParse(values);
     const t = await getTranslations('login.form.message')
 
@@ -26,12 +26,11 @@ const Login = async (values: z.infer<typeof loginSchema>, callbackUrl?: string |
     }
 
     if (!existingUser.emailVerified) {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const verificationToken = await generateVerificationToken(
+        /*const verificationToken = await generateVerificationToken(
             existingUser.email
         );
 
-        /*await sendVerificationEmail(
+        await sendVerificationEmail(
             verificationToken.email,
             verificationToken.token,
         );*/
@@ -59,4 +58,4 @@ const Login = async (values: z.infer<typeof loginSchema>, callbackUrl?: string |
 
 }
 
-export default Login;
+export default login;
