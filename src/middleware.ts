@@ -1,17 +1,15 @@
-import {withIntl} from "@/middlewares/withIntl";
-import {withAuth} from "@/middlewares/withAuth";
-import {chain} from "@/middlewares/chain";
+import {auth} from "@/auth";
+import {apiAuthPrefix, authRoutes, DEFAULT_LOGIN_REDIRECT, publicRoutes} from "../route";
+import {locales} from "@/i18n";
+import createIntlMiddleware from "next-intl/middleware"
+import {NextRequest} from "next/server";
 
-/*
-const I18nMiddleware = createI18nMiddleware({
+const intlMiddleware = createIntlMiddleware({
     locales,
-    defaultLocale: 'fr',
-})
-export function middleware(request: NextRequest) {
-    return I18nMiddleware(request)
-}
+    defaultLocale: "fr",
+});
 
-export default auth((req) => {
+const authMiddleware = auth((req) => {
     const {nextUrl} = req;
     const isLoggedIn = !!req.auth;
 
@@ -20,7 +18,7 @@ export default auth((req) => {
     const isAuthRoute = authRoutes.includes(nextUrl.pathname);
 
     if (isApiAuthRoute) {
-        return ;
+        return;
     }
 
     if (isAuthRoute) {
@@ -32,7 +30,7 @@ export default auth((req) => {
 
     if (!isLoggedIn && !isPublicRoute) {
         let callbackUrl = nextUrl.pathname;
-        if (nextUrl.search){
+        if (nextUrl.search) {
             callbackUrl += nextUrl.search;
         }
 
@@ -46,9 +44,25 @@ export default auth((req) => {
 
     return;
 })
-*/
 
-export default chain([withIntl, withAuth]);
+export default function middleware(req: NextRequest) {
+    /*const publicPathnameRegex = RegExp(
+        `^(/(<span class="math-inline">\{locales\.join\("\|"\)\}\)\)?\(</span>{publicPages.flatMap((p) => (p === "/" ? ["", "/"] : p)).join("|")})/?$`,
+        "i"
+    );*/
+    const publicPathnameRegex = RegExp(
+        `^(/(<span class="math-inline">{locales.join("")}))?(</span>{publicPages.flatMap((p) => (p === "/" ? [", /] : p)).join(")})/?$`,
+        "i"
+    );
+
+    const isPublicPage = publicPathnameRegex.test(req.nextUrl.pathname);
+
+    if (isPublicPage) {
+        return intlMiddleware(req); // Apply internationalization for public pages
+    } else {
+        return (authMiddleware as any)(req); // Apply authentication logic for non-public pages
+    }
+}
 
 export const config = {
     matcher: ['/((?!api|static|.*\\..*|_next|favicon.ico|robots.txt).*)']

@@ -5,8 +5,8 @@ import {Menu} from "@/components/ui/menu";
 import {NavbarLangSwitchSelect} from "@/components/auth/navbar-lang-switch-select";
 import {useState} from "react";
 import {type Selection} from "@react-types/shared"
-import {useCurrentLocale} from "@/locales/client";
 import {buttonStyles} from "@/components/ui/button";
+import {useLocale} from "next-intl";
 
 const opt = [
     {
@@ -20,7 +20,7 @@ const opt = [
 ]
 
 const NavbarLangSwitch = () => {
-    const locale = useCurrentLocale();
+    const locale = useLocale();
     const [selected, setSelected] = useState<Selection>(new Set([locale]))
     return (
         <Menu>

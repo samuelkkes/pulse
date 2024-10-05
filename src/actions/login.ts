@@ -7,11 +7,11 @@ import {signIn} from "@/auth";
 import {DEFAULT_LOGIN_REDIRECT} from "@/../route";
 import {AuthError} from "next-auth";
 import {generateVerificationToken} from "@/lib/token";
-import {getScopedI18n} from "@/locales/server";
+import {getTranslations} from "next-intl/server";
 
 const Login = async (values: z.infer<typeof loginSchema>, callbackUrl?: string | null) => {
     const validateFields = loginSchema.safeParse(values);
-    const t = await getScopedI18n('login.form.message')
+    const t = await getTranslations('login.form.message')
 
     if (!validateFields.success) {
         return {error: t("invalid")};

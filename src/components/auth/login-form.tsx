@@ -9,16 +9,17 @@ import {Form} from "@/components/ui/form";
 import {Button} from "@/components/ui/button";
 import {Separator} from "@/components/ui/separator";
 import {Card} from "@/components/ui/card";
-import {useScopedI18n} from "@/locales/client";
 import {IconBrandGoogle} from "justd-icons";
 import {TextField} from "@/components/ui/text-field";
 import {useSearchParams} from "next/navigation";
 import login from "@/actions/login";
 import {Note} from "@/components/ui/note"
 import {signIn} from "next-auth/react";
+import {useTranslations} from "next-intl";
+import AuthCardWrapper from "@/components/auth/authCardWrapper";
 
 const LoginForm = () => {
-    const t = useScopedI18n('login')
+    const t = useTranslations('login')
     const searchParams = useSearchParams();
     const callbackUrl = searchParams.get("callbackUrl");
     const urlError = searchParams.get("error") === "OAuthAccountNotLinked"
@@ -55,11 +56,7 @@ const LoginForm = () => {
     }
 
     return (
-        <Card className="h-fit w-full select-none rounded-3xl md:w-[360px]">
-            <Card.Header>
-                <Card.Title className="text-2xl">{t("title")}</Card.Title>
-                <Card.Description className="text-pretty">{t("description")}</Card.Description>
-            </Card.Header>
+        <AuthCardWrapper title={t("title")} description={t("description")}>
             <Card.Content className="pb-5">
                 <Form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                     <Controller
@@ -104,14 +101,14 @@ const LoginForm = () => {
             <Separator/>
             <Card.Content className="flex flex-row items-center p-5 px-6">
                 <Button
-                    onPress={()=> signIn('google')}
-                    className="flex-1"
+                    onPress={() => signIn('google')}
+                    className="flex-1 transition-colors duration-150"
                     appearance="outline">
-                    <IconBrandGoogle className="mr-2 !size-5"/>
+                    <IconBrandGoogle className="mr-2 !size-5 transition-colors duration-150"/>
                     {t("googleBtn")}
                 </Button>
             </Card.Content>
-        </Card>
+        </AuthCardWrapper>
     )
 }
 export default LoginForm

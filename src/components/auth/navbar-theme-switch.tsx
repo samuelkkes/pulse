@@ -5,11 +5,11 @@ import {Button} from "@/components/ui/button";
 import {useTheme} from "next-themes";
 import {cn} from "@/lib/utils";
 import {useRef, useState} from "react";
-import {useScopedI18n} from "@/locales/client";
 import {IconCheck, IconCircleHalf} from "justd-icons";
+import {useTranslations} from "next-intl";
 
 const NavbarThemeSwitch = () => {
-    const t = useScopedI18n('theme');
+    const t = useTranslations('theme');
     const [open, setOpen] = useState(false);
     const {theme, setTheme} = useTheme();
     const triggerRef = useRef(null);
@@ -22,8 +22,8 @@ const NavbarThemeSwitch = () => {
     return (
         <Popover>
             <Button ref={triggerRef} onPress={() => setOpen(true)} size="square-petite" appearance="plain"
-                    className="hidden hover:bg-secondary/20 md:flex">
-                <IconCircleHalf className="size-4 "/>
+                    className="hidden text-muted-fg hover:bg-secondary/20 hover:text-fg md:flex">
+                <IconCircleHalf className="size-4"/>
             </Button>
             <Popover.Content
                 showArrow={false}

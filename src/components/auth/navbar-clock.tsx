@@ -2,14 +2,12 @@
 
 import React, {useEffect, useState} from 'react'
 import {Button} from "@/components/ui/button";
-import {useCurrentLocale} from "@/locales/client";
 
 function formatTime(value: number): string {
     return value.toString().padStart(2, '0');
 }
 
 const NavbarClock = () => {
-    useCurrentLocale();
     const [hour, setHour] = useState<number>(0);
     const [minute, setMinute] = useState<number>(0);
 

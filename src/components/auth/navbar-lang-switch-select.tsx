@@ -1,7 +1,8 @@
+"use client";
+
 import React, {useTransition} from 'react'
 import {Menu} from "@/components/ui/menu";
-import {useChangeLocale} from "@/locales/client";
-import {Locales} from "@/locales";
+import {Locales} from "@/i18n";
 
 interface Props {
     localeCode: string,
@@ -9,14 +10,13 @@ interface Props {
 }
 
 export const NavbarLangSwitchSelect = ({localeCode, localeText}: Props) => {
-    const changeLocale = useChangeLocale();
+
 
     const [, startTransition] = useTransition();
 
     function onChange(value: string) {
         const lang = value as Locales;
         startTransition(() => {
-            changeLocale(lang)
         });
     }
 
