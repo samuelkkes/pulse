@@ -28,7 +28,7 @@ export const {
                 return false
             }
 
-            console.log("")
+            /**/
 
             return true;
         },
