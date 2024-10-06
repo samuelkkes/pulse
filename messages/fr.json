@@ -1,6 +1,6 @@
 {
   "login": {
-    "title": "Bienvenue sur Nexus",
+    "title": "Bienvenue sur Pulse",
     "description": "Veuillez vous connecter ci-dessous.",
     "password": "Mot de passe",
     "mainBtn": {
@@ -21,6 +21,7 @@
         "ntExtUser": "L'utilisateur n'existe pas!",
         "invalid": "Champs invalides!",
         "cfEmail": "Email de confirmation envoyé!",
+        "passEmail": "Email de mot de passe envoyé!",
         "invalidCr": "Identifiants non valides!",
         "error": "Une erreur s'est produite, veuillez réessayer!"
       }
@@ -30,5 +31,15 @@
     "dark": "Sombre",
     "light": "Clair",
     "system": "Système"
+  },
+  "mail": {
+    "resetPassword": {
+      "btn": "Réinitialiser le mot de passe",
+      "footer": "— L'équipe Pulse",
+      "title": "Pulse - Réinitialisez votre mot de passe",
+      "p1": "Quelqu'un a récemment demandé un changement de mot de passe pour votre compte Pulse. Si c'était vous, vous pouvez définir un nouveau mot de passe ici :",
+      "p2": "Si vous ne souhaitez pas modifier votre mot de passe ou ne l'avez pas demandé, ignorez et supprimez simplement ce message.",
+      "p3": "Pour assurer la sécurité de votre compte, veuillez ne transmettre cet e-mail à personne."
+    }
   }
 }

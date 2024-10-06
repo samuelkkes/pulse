@@ -137,7 +137,7 @@ const Navigation = () => {
                                     <Button
                                         onPress={()=> signOut({
                                             redirect: true,
-                                            redirectTo: "/"
+                                            redirectTo: "/home"
                                         })}
                                     >
                                         logout

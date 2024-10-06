@@ -1,4 +1,4 @@
-export const publicRoutes = ["/", "/new-verification"];
+export const publicRoutes = ["/home", "/new-verification"];
 /**
  * An array of routes that are used for authetication
  * These routes will redirect logged-in users to /settings
@@ -13,4 +13,4 @@ export const authRoutes: string[] = ["/signin", "/error", "/reset", "/new-passwo
  **/
 export const apiAuthPrefix: string = "/api/auth";
 
-export const DEFAULT_LOGIN_REDIRECT = "/app";
+export const DEFAULT_LOGIN_REDIRECT = "/";

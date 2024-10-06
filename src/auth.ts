@@ -85,7 +85,7 @@ export const {
     pages: {
         error: "/error",
         signIn: "/signin",
-        signOut: '/'
+        signOut: '/home'
     },
     providers: [
         Google,
