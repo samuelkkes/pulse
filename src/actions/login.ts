@@ -33,6 +33,7 @@ const login = async (values: z.infer<typeof loginSchema>, callbackUrl?: string |
 
         await sendVerificationEmail(
             verificationToken.email,
+            existingUser.name!,
             verificationToken.token,
         );
 

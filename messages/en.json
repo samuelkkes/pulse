@@ -33,13 +33,37 @@
     "system": "System"
   },
   "mail": {
+    "footer": "The Pulse team",
     "resetPassword": {
       "btn": "Reset password",
-      "footer": "— The Pulse team",
-      "title": "Pulse - reset your password",
+      "title": "Pulse - Reset your password",
       "p1": "Someone recently requested a password change for your Pulse account. If this was you, you can set a new password here:",
       "p2": "If you don't want to change your password or didn't request this, just ignore and delete this message.",
       "p3": "To keep your account secure, please don't forward this email to anyone."
+    },
+    "welcome": {
+      "title": "Pulse - Invitation to join our collaboration platform",
+      "p1": "Hello {name}",
+      "p2": "We are delighted to welcome you to Pulse! {name} has invited you to join our platform.",
+      "p3": "This platform is designed to facilitate your daily work in collaboration and project management. With Pulse, you'll be able to track your tasks, collaborate with colleagues, access shared documents, and much more.",
+      "p4": "To access your account, click on the following link:",
+      "btn": "Log in",
+      "p5": "We invite you to explore the different features of the platform. Please do not hesitate to contact us if you have any questions."
+    },
+    "verification": {
+      "title": "Pulse - Verify your email address",
+      "p1": "Hello {name}",
+      "p2": "To activate your account on Pulse, simply click on the confirmation link below.",
+      "btn": "Verify",
+      "p3": "To keep your account secure, please don't forward this email to anyone."
     }
+  },
+  "newVerification": {
+    "title": "",
+    "description": "",
+    "missing": "Missing token",
+    "error": "Something went wrong, please try again!",
+    "btn": "Sign in",
+    "server": {}
   }
 }

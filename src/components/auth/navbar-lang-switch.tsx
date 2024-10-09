@@ -7,6 +7,7 @@ import {useState} from "react";
 import {type Selection} from "@react-types/shared"
 import {buttonStyles} from "@/components/ui/button";
 import {useLocale} from "next-intl";
+import {twMerge} from "tailwind-merge";
 
 const opt = [
     {
@@ -24,10 +25,10 @@ const NavbarLangSwitch = () => {
     const [selected, setSelected] = useState<Selection>(new Set([locale]))
     return (
         <Menu>
-            <Menu.Trigger className={`${buttonStyles({
+            <Menu.Trigger className={twMerge(buttonStyles({
                 appearance: "plain",
                 size: "square-petite"
-            })} text-muted-fg hover:bg-secondary/20 hover:text-fg`}>
+            }), "text-muted-fg hover:bg-secondary/20 hover:text-fg")}>
                 <LanguagesIcon className="size-4 "/>
             </Menu.Trigger>
             <Menu.Content

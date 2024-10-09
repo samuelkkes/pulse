@@ -33,13 +33,37 @@
     "system": "Système"
   },
   "mail": {
+    "footer": "L'équipe Pulse",
     "resetPassword": {
       "btn": "Réinitialiser le mot de passe",
-      "footer": "— L'équipe Pulse",
       "title": "Pulse - Réinitialisez votre mot de passe",
-      "p1": "Quelqu'un a récemment demandé un changement de mot de passe pour votre compte Pulse. Si c'était vous, vous pouvez définir un nouveau mot de passe ici :",
+      "p1": "Quelqu'un a récemment demandé un changement de mot de passe pour votre compte Pulse. Si c'était vous, vous pouvez définir un nouveau mot de passe ici:",
       "p2": "Si vous ne souhaitez pas modifier votre mot de passe ou ne l'avez pas demandé, ignorez et supprimez simplement ce message.",
       "p3": "Pour assurer la sécurité de votre compte, veuillez ne transmettre cet e-mail à personne."
+    },
+    "welcome": {
+      "title": "Pulse - Invitation à rejoindre notre plateforme de collaboration",
+      "p1": "Bonjour {name}",
+      "p2": "Nous sommes ravis de vous accueillir sur Pulse! {name} vous a invité à rejoindre notre plateforme.",
+      "p3": "Cette plateforme est conçue pour faciliter votre travail quotidien en matière de collaboration et de gestion de projets. Grâce à Pulse, vous pourrez suivre vos tâches, collaborer avec vos collègues, accéder à des documents partagés, et bien plus encore.",
+      "p4": "Pour accéder à votre compte, cliquez sur le lien suivant :",
+      "btn": "Connectez vous",
+      "p5": "Nous vous invitons à explorer les différentes fonctionnalités de la plateforme. N'hésitez pas à nous contacter si vous avez des questions."
+    },
+    "verification": {
+      "title": "Pulse - Vérifiez votre adresse e-mail",
+      "p1": "Bonjour {name}",
+      "p2": "Pour activer votre compte sur Pulse, il vous suffit de cliquer sur le lien de confirmation ci dessous.",
+      "btn": "Verifier",
+      "p3": "Pour assurer la sécurité de votre compte, veuillez ne transmettre cet e-mail à personne."
     }
+  },
+  "newVerification": {
+    "title": "",
+    "description": "",
+    "missing": "Token manquant!",
+    "error": "Une erreur s'est produite, veuillez réessayer!",
+    "btn": "Connectez vous",
+    "server": {}
   }
 }
