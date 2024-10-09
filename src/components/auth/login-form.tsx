@@ -70,6 +70,7 @@ const LoginForm = () => {
                                 type="email"
                                 className="w-full"
                                 validationBehavior="aria"
+                                isDisabled={isPending}
                                 isRequired
                                 errorMessage={fieldState.error?.message}
                                 isInvalid={fieldState.invalid}
@@ -87,6 +88,7 @@ const LoginForm = () => {
                                 type="password"
                                 className="w-full"
                                 validationBehavior="aria"
+                                isDisabled={isPending}
                                 isRequired
                                 errorMessage={fieldState.error?.message}
                                 isInvalid={fieldState.invalid}

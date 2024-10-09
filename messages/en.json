@@ -65,8 +65,17 @@
     "server": {
       "exist": "Token doesn't exist",
       "expired": "Token has expired",
+      "invalidToken": "Invalid token!",
       "email": "Email does not exist",
-      "success": "Thank you for confirming your email address. You can now log in to your account."
+      "verificationSuccess": "Thank you for confirming your email address. You can now log in to your account.",
+      "passwordSuccess": "Your password has been successfully updated. Click here to log in.",
+      "invalidFields": "Invalid fields!"
     }
+  },
+  "newPassword": {
+    "title": "Reset password",
+    "btn": "Reset password",
+    "password": "Password",
+    "signInBtn": "Sign in"
   }
 }

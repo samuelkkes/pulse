@@ -65,8 +65,17 @@
     "server": {
       "exist": "Le token n'existe pas!",
       "expired": "Token a expiré!",
+      "invalidToken": "Token invalid!",
       "email": "L'e-mail n'existe pas",
-      "success": "Merci d'avoir confirmé votre adresse email. Vous pouvez désormais vous connecter à votre compte."
+      "verificationSuccess": "Merci d'avoir confirmé votre adresse email. Vous pouvez désormais vous connecter à votre compte.",
+      "passwordSuccess": "Votre mot de passe a été mis à jour avec succès. Cliquez ici pour vous connecter.",
+      "invalidFields": "Champs invalid!"
     }
+  },
+  "newPassword": {
+    "title": "Changez de mot de passe.",
+    "btn": "Rénitialiser le mot de passe",
+    "password": "Mot de passe",
+    "signInBtn": "Connectez vous"
   }
 }

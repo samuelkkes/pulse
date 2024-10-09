@@ -18,7 +18,7 @@ export const loginSchema = z.object({
     })
 })
 
-export const passwordSchema = z.object({
+export const newPasswordSchema = z.object({
     password: z.string({
         required_error: "Password is required",
     }).min(8, {

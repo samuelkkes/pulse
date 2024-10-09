@@ -53,7 +53,7 @@ export const sendWelcomeEmail = async (email: string, mName: string, tName: stri
 
 export const sendPasswordResetEmail = async (email: string, token: string) => {
     const t = await getTranslations('mail.resetPassword')
-    const resetLink = `${domain}/auth/new-password?token=${token}`;
+    const resetLink = `${domain}/new-password?token=${token}`;
 
     const props = {
         btn: t("btn"),

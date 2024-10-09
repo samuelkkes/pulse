@@ -11,7 +11,6 @@ import {Separator} from "@/components/ui/separator";
 import Link from "next/link";
 import {twMerge} from "tailwind-merge";
 import {useTranslations} from "next-intl";
-import {IconArrowLeft} from "justd-icons";
 
 const NewVerificationForm = () => {
     const t = useTranslations("newVerification")
@@ -62,7 +61,6 @@ const NewVerificationForm = () => {
                             href="/signin"
                             className={twMerge(buttonStyles({intent: "secondary"}), "items-center transition-colors duration-150 flex-1 group")}
                         >
-                            <IconArrowLeft className="mr-1 size-6 transition-all duration-150 group-hover:!mr-1.5" />
                             <span>{t("btn")}</span>
                         </Link>
                     </Card.Content>
