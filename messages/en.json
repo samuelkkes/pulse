@@ -59,11 +59,14 @@
     }
   },
   "newVerification": {
-    "title": "",
-    "description": "",
     "missing": "Missing token",
     "error": "Something went wrong, please try again!",
     "btn": "Sign in",
-    "server": {}
+    "server": {
+      "exist": "Token doesn't exist",
+      "expired": "Token has expired",
+      "email": "Email does not exist",
+      "success": "Thank you for confirming your email address. You can now log in to your account."
+    }
   }
 }

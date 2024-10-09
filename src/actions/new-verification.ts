@@ -3,26 +3,26 @@
 import {getVerificationTokenByToken} from "@/data/verification-token";
 import {getUserByEmail} from "@/data/user";
 import {db} from "@/lib/db";
+import {getTranslations} from "next-intl/server";
 
 export const newVerification = async (token: string) => {
+    const t = await getTranslations("newVerification.server")
     const existingToken = await getVerificationTokenByToken(token);
 
-    console.log(existingToken);
-
     if (!existingToken) {
-        return {error: "Token doesn\'t exist"}
+        return {error: t("exist")}
     }
 
     const hasExpired = new Date(existingToken.expires) < new Date();
 
     if (hasExpired) {
-        return {error: "Token has expired"}
+        return {error: t("expired")}
     }
 
     const existingUser = await getUserByEmail(existingToken.email);
 
     if (!existingUser) {
-        return {error: "Email does not exist"};
+        return {error: t("email")};
     }
 
     await db.user.update({

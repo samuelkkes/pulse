@@ -59,11 +59,14 @@
     }
   },
   "newVerification": {
-    "title": "",
-    "description": "",
     "missing": "Token manquant!",
     "error": "Une erreur s'est produite, veuillez réessayer!",
     "btn": "Connectez vous",
-    "server": {}
+    "server": {
+      "exist": "Le token n'existe pas!",
+      "expired": "Token a expiré!",
+      "email": "L'e-mail n'existe pas",
+      "success": "Merci d'avoir confirmé votre adresse email. Vous pouvez désormais vous connecter à votre compte."
+    }
   }
 }

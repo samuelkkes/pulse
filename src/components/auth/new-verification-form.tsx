@@ -1,7 +1,6 @@
 "use client";
 
 import {Card} from "@/components/ui/card";
-import AuthCardWrapper from "@/components/auth/authCardWrapper";
 import React, {useCallback, useEffect, useState} from "react";
 import {useSearchParams} from "next/navigation";
 import {newVerification} from "@/actions/new-verification";
@@ -44,27 +43,32 @@ const NewVerificationForm = () => {
     }, [onSubmit]);
     
     return (
-        <AuthCardWrapper title={t("title")} description={t("description")}>
-            <Card.Content className="pb-5">
+        <Card className="h-fit w-full select-none rounded-3xl md:w-[360px]">
+            <Card.Content className="px-6 py-5">
                 <div className="flex w-full items-center justify-center">
                     {!success && !error && (
-                        <Loader />
+                        <Loader intent="primary" size="medium" variant="spin"/>
                     )}
-                    {success && (<Note className="w-full" intent="primary">{success}</Note>)}
-                    {(error ) && (<Note className="w-full" intent="danger">{error}</Note>)}
+                    {success && (<Note className="my-0 w-full" intent="primary">{success}</Note>)}
+                    {(error ) && (<Note className="my-0 w-full" intent="danger">{error}</Note>)}
                 </div>
             </Card.Content>
-            <Separator/>
-            <Card.Content className="flex flex-row items-center p-5 px-6">
-                <Link
-                    href="/signin"
-                    className={twMerge(buttonStyles({intent: "secondary"}), "flex-1 transition-colors duration-150 group")}
-                >
-                    <IconArrowLeft className="ml-2 size-6 transition-all duration-150 group-hover:!mr-2.5" />
-                    <span>{t("btn")}</span>
-                </Link>
-            </Card.Content>
-        </AuthCardWrapper>
+            {(success || error) && (
+                <>
+                    {/*TODO: Add a slide down animation to the card content once the function on submit complete*/}
+                    <Separator/>
+                    <Card.Content className="flex flex-row items-center p-5 px-6">
+                        <Link
+                            href="/signin"
+                            className={twMerge(buttonStyles({intent: "secondary"}), "items-center transition-colors duration-150 flex-1 group")}
+                        >
+                            <IconArrowLeft className="mr-1 size-6 transition-all duration-150 group-hover:!mr-1.5" />
+                            <span>{t("btn")}</span>
+                        </Link>
+                    </Card.Content>
+                </>
+            )}
+        </Card>
     )
 }
 export default NewVerificationForm
