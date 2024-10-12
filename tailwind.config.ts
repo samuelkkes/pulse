@@ -18,7 +18,7 @@ const config = withTV({
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-noto-sans)'],
+        sans: ['var(--font-inter-sans)'],
         mono: ['var(--font-geist-mono)'],
       },
       colors: {
