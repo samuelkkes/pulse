@@ -15,6 +15,7 @@ export const NavbarLangSwitchSelect = ({localeCode, localeText}: Props) => {
     const [, startTransition] = useTransition();
 
     function onChange(value: string) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const lang = value as Locales;
         startTransition(() => {
         });

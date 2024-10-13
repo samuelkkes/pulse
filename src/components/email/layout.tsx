@@ -27,7 +27,6 @@ const Layout = async ({title, children}: ILayout) => {
                 <Body style={main}>
                     <Container className="mx-auto my-0 mb-16 rounded-lg bg-white px-0 pb-16 pt-5">
                         <Section className="px-12 py-0">
-                            {/* eslint-disable-next-line tailwindcss/no-custom-classname */}
                             <Text className="text-brand text-left font-mono text-lg font-bold">Pulse</Text>
                             <Hr className="mx-0 my-5 border-slate-300"/>
                             {children}

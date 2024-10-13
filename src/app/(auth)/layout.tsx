@@ -1,9 +1,10 @@
-import {ReactNode} from 'react'
+import {ReactNode, Suspense} from 'react'
 import NavbarThemeSwitch from "@/components/auth/navbar-theme-switch";
 import NavbarLangSwitch from "@/components/auth/navbar-lang-switch";
 import NavbarClock from "@/components/auth/navbar-clock";
 import Particles from "@/components/global/particles";
 import Logo from "@/components/app/logo";
+import Loading from "@/components/global/loading";
 
 export default function SubLayout({children}: { children: ReactNode }) {
     return (
@@ -18,7 +19,9 @@ export default function SubLayout({children}: { children: ReactNode }) {
                 </div>
             </nav>
             <div className="flex flex-1 justify-center px-4 pt-20 md:items-center md:p-0">
-                {children}
+                <Suspense fallback={<Loading/>}>
+                    {children}
+                </Suspense>
             </div>
         </main>
     )

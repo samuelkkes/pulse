@@ -28,7 +28,6 @@ const Welcome = ({btn, link, p1, p2, p3, p4, p5, title}: IWelcome) => {
             <Text className="text-left text-base text-slate-700" >
                 {p4}
             </Text>
-            {/* eslint-disable-next-line tailwindcss/no-custom-classname */}
             <Button className="bg-brand block w-full rounded-md p-2.5 text-center text-base font-bold text-white no-underline" href={link}>
                 {btn}
             </Button>
