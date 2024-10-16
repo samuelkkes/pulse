@@ -7,7 +7,7 @@ const ThemeProvider = ({ children }: {children: ReactNode}) => {
   return (
       <NextThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
           storageKey="pulse-theme"

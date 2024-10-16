@@ -1,45 +1,130 @@
 "use client";
 
 import React from 'react'
-import {Separator} from "@/components/ui/separator";
 import {Popover} from "@/components/ui/popover";
-import {Button} from "@/components/ui/button";
-import {IconChevronRight, IconCirclePersonFill} from "justd-icons";
-import {Card} from "@/components/ui/card";
+import {Button, buttonStyles} from "@/components/ui/button";
+import Logo from "@/components/app/logo";
+import {
+    ArrowLeftRightIcon,
+    CalendarIcon,
+    ChevronDownIcon,
+    FileCheckIcon,
+    FileTextIcon,
+    FolderIcon,
+    HouseIcon,
+    MessageCircleIcon, MousePointerClickIcon, UserCircleIcon,
+    Users2Icon, WorkflowIcon
+} from "lucide-react";
+import Link from "next/link";
+import {cn} from "@/lib/utils";
+import {usePathname} from "next/navigation";
+import {signOut} from "next-auth/react";
+
+const sidebarNavLinks = [
+    {
+        label: "Home",
+        link: "/",
+        icon: HouseIcon
+    },
+    {
+        label: "Tasks",
+        link: "/tasks",
+        icon: FileTextIcon
+    },
+    {
+        label: "Projects",
+        link: "/projects",
+        icon: FolderIcon
+    },
+    {
+        label: "Docs",
+        link: "/docs",
+        icon: FileCheckIcon
+    },
+    {
+        label: "Schedule",
+        link: "/schedule",
+        icon: CalendarIcon
+    },
+    {
+        label: "Chat",
+        link: "/chat",
+        icon: MessageCircleIcon
+    },
+    {
+        label: "Payments",
+        link: "/payments",
+        icon: ArrowLeftRightIcon
+    },
+    {
+        label: "Customers",
+        link: "/customers",
+        icon: UserCircleIcon
+    },
+    {
+        label: "Automations",
+        link: "/automations",
+        icon: MousePointerClickIcon
+    },
+    {
+        label: "Workflow",
+        link: "/workflow",
+        icon: WorkflowIcon
+    },
+    {
+        label: "Users management",
+        link: "/users",
+        icon: Users2Icon
+    }
+]
 
 const Sidebar = () => {
+    const pathname = usePathname();
+
     return (
         <>
-            <aside className="flex w-60 flex-col p-2">
-                <Card className="flex h-full flex-col shadow drop-shadow">
-                    <div className="flex-1">
-                        <div className="w-full p-2 text-left text-lg">
-                            Nexus
+            <aside className="flex w-56 flex-col pl-2 pt-4">
+                <div className="flex h-full flex-col">
+                    <div className="flex flex-1 flex-col gap-y-4">
+                        <div className="ml-3">
+                            <Logo size={28} link="/"/>
                         </div>
-                        <Separator/>
-
-                    </div>
-                    <Separator/>
-                    <div className="p-1">
                         <Popover>
-                            <Button className="group flex w-full bg-secondary text-secondary-fg" size="extra-small"
-                                    appearance="plain">
-                                <IconCirclePersonFill className="mr-2 group-hover:text-primary"/>
+                            <Button className="flex w-full" appearance="solid" intent="secondary">
                                 <span className="flex-1">Samuel Kougbam</span>
-                                <IconChevronRight className="ml-2"/>
+                                <ChevronDownIcon className="ml-2"/>
                             </Button>
-                            <Popover.Content className="min-w-80 drop-shadow-xl" showArrow={false} placement="right">
-                                <Popover.Header>
-                                    <Popover.Title>Email</Popover.Title>
-                                    <Popover.Description>We&apos;ll send you an email to log in.</Popover.Description>
-                                </Popover.Header>
+                            <Popover.Content className="min-w-80 drop-shadow-xl" showArrow={false} placement="bottom">
                                 <Popover.Footer>
-                                    <Button>Send Login Link</Button>
+                                    <Button
+                                        onPress={() => signOut({
+                                            redirect: true,
+                                            redirectTo: "/home"
+                                        })}
+                                    >
+                                        logout
+                                    </Button>
                                 </Popover.Footer>
                             </Popover.Content>
                         </Popover>
+                        <nav className="flex flex-1 flex-col gap-y-2">
+                            {
+                                sidebarNavLinks.map((item, index) => {
+                                    return (
+                                        <Link key={`navLink-${index}`} href={item.link} className={cn(buttonStyles({
+                                            size: "extra-small",
+                                            appearance: pathname === item.link ? "solid" : "plain",
+                                            intent: pathname === item.link ? "primary" : "secondary"
+                                        }), "flex w-full")}>
+                                            <item.icon className="mr-1 size-4"/>
+                                            <span className="flex-1">{item.label}</span>
+                                        </Link>
+                                    )
+                                })
+                            }
+                        </nav>
                     </div>
-                </Card>
+                </div>
             </aside>
         </>
     )
