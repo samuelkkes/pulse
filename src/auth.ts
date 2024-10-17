@@ -47,8 +47,9 @@ export const {
         },
         async jwt({ account, user, token }) {
             if (account?.provider === 'credentials') {
+
                 const sessionToken = uuidv4()
-                const expires = new Date(Date.now() + 60 * 60 * 24 * 30 * 1000)
+                const expires = new Date(Date.now() + 60 * 60 * 24 * 7 * 1000)
 
                 const session = await PrismaAdapter(db).createSession!({
                     userId: user.id!,

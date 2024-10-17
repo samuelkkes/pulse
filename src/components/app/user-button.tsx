@@ -7,9 +7,18 @@ import {signOut} from "next-auth/react";
 import {useCurrentUser} from "@/hooks/use-current-user";
 import {Avatar} from "@/components/ui/avatar";
 import {cn, getInitials} from "@/lib/utils";
+import {Loader} from "@/components/ui/loader";
 
 export const UserButton = () => {
-    const {user} = useCurrentUser();
+    const {user, status} = useCurrentUser();
+
+    if (status == "loading") {
+        return (
+            <div className={cn(buttonStyles({appearance:"solid", intent:"secondary"}),"flex w-full !px-1")}>
+                <Loader variant="spin"/>
+            </div>
+        )
+    }
 
     return (
         <Menu>

@@ -22,7 +22,7 @@ const AvatarGroup = ({ className, ...props }: AvatarGroupProps) => {
 
 const avatarStyles = tv({
   base: [
-    'inline-grid relative shrink-0 bg-secondary align-middle [--avatar-radius:20%] [--ring-opacity:20%] *:col-start-1 *:row-start-1',
+    'relative inline-grid shrink-0 bg-secondary align-middle [--avatar-radius:20%] [--ring-opacity:20%] *:col-start-1 *:row-start-1',
     'loo2ppvkxrcah38e outline outline-1 -outline-offset-1 outline-fg/[--ring-opacity]'
   ],
   variants: {
@@ -111,11 +111,11 @@ type AvatarBadgeProps = {
 }
 
 const avatarBadgeStyles = tv({
-  base: ['size-3 z-10 absolute bottom-0 right-0 rounded-full ring-[1.5px] ring-bg bg-bg'],
+  base: ['absolute bottom-0 right-0 z-10 size-3 rounded-full bg-bg ring-[1.5px] ring-bg'],
   variants: {
     size: {
-      'extra-small': 'size-[0.360rem] translate-x-[0%] translate-y-[0%]',
-      small: 'size-1.5 translate-x-[0%] translate-y-[0%]',
+      'extra-small': 'size-[0.360rem] translate-x-0 translate-y-0',
+      small: 'size-1.5 translate-x-0 translate-y-0',
       medium: 'size-2 translate-x-[5%] translate-y-[5%]',
       large: 'size-2.5 translate-x-[5%] translate-y-[5%]'
     },

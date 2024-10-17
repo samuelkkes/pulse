@@ -83,34 +83,32 @@ const Sidebar = () => {
     const pathname = usePathname();
 
     return (
-        <>
-            <aside className="flex w-56 flex-col pl-2 pt-4">
-                <div className="flex h-full flex-col">
-                    <div className="flex flex-1 flex-col gap-y-4">
-                        <div className="ml-3">
-                            <Logo size={28} link="/"/>
-                        </div>
-                        <UserButton/>
-                        <nav className="flex flex-1 flex-col gap-y-2">
-                            {
-                                sidebarNavLinks.map((item, index) => {
-                                    return (
-                                        <Link key={`navLink-${index}`} href={item.link} className={cn(buttonStyles({
-                                            size: "extra-small",
-                                            appearance: pathname === item.link ? "solid" : "plain",
-                                            intent: pathname === item.link ? "primary" : "secondary"
-                                        }), "flex w-full")}>
-                                            <item.icon className="mr-1 size-4"/>
-                                            <span className="flex-1">{item.label}</span>
-                                        </Link>
-                                    )
-                                })
-                            }
-                        </nav>
+        <aside className="flex w-56 flex-col pl-2 pt-4">
+            <div className="flex h-full flex-col">
+                <div className="flex flex-1 flex-col">
+                    <div className="py-4 pl-2">
+                        <Logo size={28} link="/"/>
                     </div>
+                    <UserButton/>
+                    <nav aria-label="Sidebar navigation"  className="mt-4 flex flex-1 flex-col gap-y-2">
+                        {
+                            sidebarNavLinks.map((item, index) => {
+                                return (
+                                    <Link key={`navLink-${index}`} href={item.link} className={cn(buttonStyles({
+                                        size: "extra-small",
+                                        appearance: pathname === item.link ? "solid" : "plain",
+                                        intent: pathname === item.link ? "primary" : "secondary"
+                                    }), "flex w-full")}>
+                                        <item.icon className="mr-1 size-4"/>
+                                        <span className="flex-1">{item.label}</span>
+                                    </Link>
+                                )
+                            })
+                        }
+                    </nav>
                 </div>
-            </aside>
-        </>
+            </div>
+        </aside>
     )
 }
 export default Sidebar
