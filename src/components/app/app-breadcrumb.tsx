@@ -10,7 +10,7 @@ import {
     FolderIcon,
     HouseIcon,
     MessageCircleIcon, MousePointerClickIcon,
-    SquareIcon, UserCircleIcon, Users2Icon, WorkflowIcon
+    SquareIcon, UserCircleIcon, UsersIcon, WorkflowIcon
 } from "lucide-react";
 import {cn} from "@/lib/utils";
 import {badgeStyles} from "@/components/ui/badge";
@@ -38,7 +38,7 @@ const getLeadIcon = (link: string) => {
         case "/workflow":
             return WorkflowIcon
         case "/users":
-            return Users2Icon
+            return UsersIcon
         default:
             return SquareIcon
     }
@@ -49,7 +49,7 @@ export const AppBreadcrumb = () => {
     const pathNames = paths === '/' ? [''] : paths.split('/').filter(paths => paths)
 
     return (
-        <nav aria-label="Breadcrumbs" className="w-full border-b-2 border-muted-fg/40 px-16 py-4 dark:border-muted">
+        <nav aria-label="Breadcrumbs" className="w-full border-b-2 border-muted-fg/40 px-8 py-4 dark:border-muted">
             <Breadcrumbs>
                 {pathNames.map((value, index, {length}) => {
                     const href = `/${pathNames.slice(0, index + 1).join('/')}`

@@ -1,24 +1,25 @@
 "use client";
 
 import React from 'react'
-import {Popover} from "@/components/ui/popover";
-import {Button, buttonStyles} from "@/components/ui/button";
+import {buttonStyles} from "@/components/ui/button";
 import Logo from "@/components/app/logo";
 import {
     ArrowLeftRightIcon,
     CalendarIcon,
-    ChevronDownIcon,
     FileCheckIcon,
     FileTextIcon,
     FolderIcon,
     HouseIcon,
-    MessageCircleIcon, MousePointerClickIcon, UserCircleIcon,
-    Users2Icon, WorkflowIcon
+    MessageCircleIcon,
+    MousePointerClickIcon,
+    UserCircleIcon,
+    UsersIcon,
+    WorkflowIcon
 } from "lucide-react";
 import Link from "next/link";
 import {cn} from "@/lib/utils";
 import {usePathname} from "next/navigation";
-import {signOut} from "next-auth/react";
+import {UserButton} from "@/components/app/user-button";
 
 const sidebarNavLinks = [
     {
@@ -74,7 +75,7 @@ const sidebarNavLinks = [
     {
         label: "Users management",
         link: "/users",
-        icon: Users2Icon
+        icon: UsersIcon
     }
 ]
 
@@ -89,24 +90,7 @@ const Sidebar = () => {
                         <div className="ml-3">
                             <Logo size={28} link="/"/>
                         </div>
-                        <Popover>
-                            <Button className="flex w-full" appearance="solid" intent="secondary">
-                                <span className="flex-1">Samuel Kougbam</span>
-                                <ChevronDownIcon className="ml-2"/>
-                            </Button>
-                            <Popover.Content className="min-w-80 drop-shadow-xl" showArrow={false} placement="bottom">
-                                <Popover.Footer>
-                                    <Button
-                                        onPress={() => signOut({
-                                            redirect: true,
-                                            redirectTo: "/home"
-                                        })}
-                                    >
-                                        logout
-                                    </Button>
-                                </Popover.Footer>
-                            </Popover.Content>
-                        </Popover>
+                        <UserButton/>
                         <nav className="flex flex-1 flex-col gap-y-2">
                             {
                                 sidebarNavLinks.map((item, index) => {
