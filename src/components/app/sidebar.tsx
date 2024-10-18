@@ -83,7 +83,7 @@ const Sidebar = () => {
     const pathname = usePathname();
 
     return (
-        <aside className="flex w-56 flex-col pl-2 pt-4">
+        <aside className="flex w-56 flex-col bg-muted pl-2 pt-4 dark:bg-bg">
             <div className="flex h-full flex-col">
                 <div className="flex flex-1 flex-col">
                     <div className="py-4 pl-2">

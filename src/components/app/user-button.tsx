@@ -24,7 +24,7 @@ export const UserButton = () => {
         <Menu>
             <Menu.Trigger className={cn(buttonStyles({appearance:"solid", intent:"secondary"}),"flex w-full !px-1")}>
                 <span className="flex flex-1 items-center gap-x-1">
-                    <Avatar shape="square" initials={getInitials(user?.name)} alt="profile image" src={user?.image}/>
+                    <Avatar shape="circle" initials={getInitials(user?.name)} alt="image" src={user?.image}/>
                     <span className="flex-1 truncate text-xs">{user?.name}</span>
                 </span>
             </Menu.Trigger>
