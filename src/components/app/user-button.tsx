@@ -8,6 +8,7 @@ import {useCurrentUser} from "@/hooks/use-current-user";
 import {Avatar} from "@/components/ui/avatar";
 import {cn, getInitials} from "@/lib/utils";
 import {Loader} from "@/components/ui/loader";
+import {IconChevronDown} from "justd-icons";
 
 export const UserButton = () => {
     const {user, status} = useCurrentUser();
@@ -27,8 +28,15 @@ export const UserButton = () => {
                     <Avatar shape="circle" initials={getInitials(user?.name)} alt="image" src={user?.image}/>
                     <span className="flex-1 truncate text-xs">{user?.name}</span>
                 </span>
+                <IconChevronDown/>
             </Menu.Trigger>
             <Menu.Content className="w-[216px]" showArrow={false} placement="bottom start" containerPadding={8}>
+                <Menu.Section>
+                    <Menu.Header separator>
+                        <div className="block truncate">{user?.name}</div>
+                        <div className="truncate font-normal text-muted-fg">{user?.email}</div>
+                    </Menu.Header>
+                </Menu.Section>
                 <Menu.Item>
                     <UserIcon className="size-4"/>
                     <span className="text-xs">View Profile</span>
