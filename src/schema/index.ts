@@ -4,7 +4,6 @@ const upperCaseRegex = /(?=.*[A-Z])\w+/;
 const numberRegex = /\d/;
 const specialCharacterRegex = /[`!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/;
 
-
 export const loginSchema = z.object({
     email: z.string({
         required_error: "Email is required",

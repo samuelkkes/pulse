@@ -8,7 +8,7 @@ interface ILogo {
     size?: number
 }
 
-export default function Logo({withText = true, link = "/home", size = 38}: ILogo) {
+export const LinkLogo = ({withText = true, link = "/home", size = 38}: ILogo) => {
     return (
         <Link className="group/logo flex cursor-pointer select-none items-center gap-x-1 text-muted-fg" href={link}>
             <Image src={LogoImg} width={size} height={size} priority alt="Pulse logo"/>
@@ -18,5 +18,11 @@ export default function Logo({withText = true, link = "/home", size = 38}: ILogo
                 </span>
             )}
         </Link>
+    )
+}
+
+export const Logo = ({size = 34}: {size?: number}) => {
+    return (
+        <Image src={LogoImg} width={size} height={size} priority alt="Pulse logo"/>
     )
 }

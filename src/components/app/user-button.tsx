@@ -2,13 +2,12 @@
 
 import {Menu} from "@/components/ui/menu";
 import { buttonStyles} from "@/components/ui/button";
-import { LogOutIcon, SettingsIcon, UserIcon, UserPlusIcon, UsersRoundIcon} from "lucide-react";
+import {ChevronsUpDownIcon, LogOutIcon, SettingsIcon, UserIcon, UserPlusIcon, UsersRoundIcon} from "lucide-react";
 import {signOut} from "next-auth/react";
-import {useCurrentUser} from "@/hooks/use-current-user";
-import {Avatar} from "@/components/ui/avatar";
-import {cn, getInitials} from "@/lib/utils";
+import {useCurrentUser} from "@/hooks/use-current-user"
+import {cn} from "@/lib/utils";
 import {Loader} from "@/components/ui/loader";
-import {IconChevronDown} from "justd-icons";
+import {Logo} from "@/components/app/logo";
 
 export const UserButton = () => {
     const {user, status} = useCurrentUser();
@@ -23,12 +22,15 @@ export const UserButton = () => {
 
     return (
         <Menu>
-            <Menu.Trigger className={cn(buttonStyles({appearance:"solid", intent:"secondary"}),"flex w-full !px-1")}>
-                <span className="flex flex-1 items-center gap-x-1">
-                    <Avatar shape="circle" initials={getInitials(user?.name)} alt="image" src={user?.image}/>
-                    <span className="flex-1 truncate text-xs">{user?.name}</span>
+            <Menu.Trigger className={cn(buttonStyles({appearance:"solid", intent:"secondary", size: "large"}),"flex w-full")}>
+                <span className="flex flex-1 gap-x-1">
+                    <Logo/>
+                    <span className="flex flex-col justify-center gap-y-0.5 text-xs">
+                        <span className="truncate font-mono text-sm font-semibold">Pulse</span>
+                        <span className="truncate text-xs text-muted-fg/30">Enterprise</span>
+                    </span>
                 </span>
-                <IconChevronDown/>
+                <ChevronsUpDownIcon className="ml-2 size-4"/>
             </Menu.Trigger>
             <Menu.Content className="w-[216px]" showArrow={false} placement="bottom start" containerPadding={8}>
                 <Menu.Section>

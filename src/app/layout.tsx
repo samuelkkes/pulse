@@ -1,5 +1,5 @@
 import type {Metadata} from "next";
-import { Inter} from "next/font/google"
+import {Inter} from "next/font/google"
 import {GeistMono} from 'geist/font/mono';
 import "./globals.css";
 import {Providers} from "@/components/providers/providers";

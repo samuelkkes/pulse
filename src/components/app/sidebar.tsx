@@ -2,7 +2,6 @@
 
 import React from 'react'
 import {buttonStyles} from "@/components/ui/button";
-import Logo from "@/components/app/logo";
 import {
     ArrowLeftRightIcon,
     CalendarIcon,
@@ -86,9 +85,6 @@ const Sidebar = () => {
         <aside className="flex w-56 flex-col bg-muted pl-2 pt-4 dark:bg-bg">
             <div className="flex h-full flex-col">
                 <div className="flex flex-1 flex-col">
-                    <div className="py-4 pl-2">
-                        <Logo size={28} link="/"/>
-                    </div>
                     <UserButton/>
                     <nav aria-label="Sidebar navigation"  className="mt-4 flex flex-1 flex-col gap-y-2">
                         {
